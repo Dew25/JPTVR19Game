@@ -17,16 +17,33 @@ import java.util.Scanner;
 public class App {
     public void run(){
         System.out.println("Привет.");
-        System.out.println("Программа задумала число, угадай:");
-        Random random = new Random();
-        int myNumber = random.nextInt(5 - 0 + 1)+0;
+        System.out.println("Поиграем, если ты укажишь диапазон игры.");
         Scanner scanner = new Scanner(System.in);
-        int gamerNumber = scanner.nextInt();
-        if(myNumber == gamerNumber){
-            System.out.println("Ты выиграл!");
-        }else{
-            System.out.println("Ты проиграл! Было задумано: " 
-                    + myNumber);
-        }
+        System.out.print("min = ");
+        int min = scanner.nextInt();
+        System.out.print("max = ");
+        int max = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Программа задумала число от "
+                +min+" до "+max+", угадай:");
+        Random random = new Random();
+        int attempt = 0;
+        do {            
+            int myNumber = random.nextInt(max - min + 1)+min;
+            int gamerNumber = scanner.nextInt();
+            if(myNumber == gamerNumber){
+                System.out.println("Ты выиграл!");
+                break;
+            }else{
+                if(attempt > 1){
+                    System.out.println("Ты проиграл! Было задумано: " 
+                        + myNumber);
+                    break;
+                }else{
+                    System.out.println("Попробуй еще раз: ");
+                }
+                attempt++;
+            }
+        } while (true);
     }
 }
